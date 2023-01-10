@@ -8,7 +8,23 @@ class AUTHENTICATION
      */
     public static function login( $email, $password )
     {
-        
+        $user_id = false;
+        $user = DB::connect()->select(
+            'SELECT * FROM users WHERE email = :email',
+            [
+                'email' => $email
+            ]      
+        );
+        // if $user is valid, then return $user array
+        if ( $user ) {
+            // proceed to verify password
+            if ( password_verify( $password, $user['password'] ) ) {
+                $user_id = $user['id'];
+            }
+        }
+
+        // make sure to return the user's ID
+        return $user_id;
     }
 
     /**
@@ -16,16 +32,7 @@ class AUTHENTICATION
      */
     public static function signup( $name, $email , $password )
     {
-        // old way
-        // $statement = $this->db->prepare( 'INSERT INTO users (name,email,password)
-        // VALUES (:name, :email, :password)' );
-        // $statement->execute( [
-        //     'name' => $name,
-        //     'email' => $email,
-        //     'password' => $password,
-        // ] );
 
-        // new way
         return DB::connect()->insert(
             'INSERT INTO users (name,email,password)
             VALUES (:name, :email, :password)',
@@ -69,7 +76,8 @@ class AUTHENTICATION
         $_SESSION['user'] = [
             'id' => $user['id'],
             'name' => $user['name'],
-            'email' => $user['email']
+            'email' => $user['email'],
+            'role' => $user['role']
         ];
      }
 }

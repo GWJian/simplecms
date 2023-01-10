@@ -7,6 +7,7 @@
     require "includes/class-db.php";
     require "includes/class-user.php";
     require "includes/class-authentication.php";
+    require "includes/class-form-validation.php";
 
     // get route
     $path = trim( $_SERVER["REQUEST_URI"], '/' );

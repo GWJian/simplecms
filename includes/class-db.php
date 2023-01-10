@@ -8,7 +8,7 @@ class DB
     {
         try{
             $this->db = new PDO(
-                'mysql:host=devkinsta_db;dbname=Simple_CMS',
+                'mysql:host=devkinsta_db;dbname=simplecms',
                 'root',
                 '4JqGyoVdUoAAEJxU'
             );
