@@ -1,7 +1,6 @@
 <?php
-
- // set CSRF token
-
+     // set CSRF token
+     CSRF::generateToken( 'login_form' );
 
     // make sure if the user wasn't logged in yet. 
     // If the user already logged in, we'll redirect to dashboard page
@@ -18,21 +17,21 @@
       $password = $_POST['password'];
       
       // Step 1: do error check
-      $error = FORMVALIDATION::validate
-      ( 
+      $error = FORMVALIDATION::validate( 
         $_POST ,
         [
           'email'=>'required',
           // email is the key, required is the condition
-          'password'=>'required'
+          'password'=>'required',
           // password is the key, required is the condition
+          'csrf_token' => 'login_form_csrf_token'
         ]
       );
 
       //make sure there is no error
       if ( !$error ){
-              // Step 2: login the user
-      $user_id = Authentication::login( $email, $password );
+        // Step 2: login the user
+        $user_id = Authentication::login( $email, $password );
       
       // if $user_id is false, 
       // meaning either email or password is incorrect
@@ -50,7 +49,7 @@
 
       // Step 4: remove csrf token & redirect the user to dashboard
         // 4.1: remove csrf token
-
+        CSRF::removeToken( 'login_form' );
 
         // 4.2: redirect to dashboard
         header('Location: /dashboard');
@@ -64,6 +63,7 @@
     
     require dirname(__DIR__) . '/parts/header.php';
 ?>
+
 <div class="container my-5 mx-auto" style="max-width: 500px;">
     <h1 class="h1 mb-4 text-center">Login</h1>
 
@@ -81,6 +81,8 @@
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Login</button>
             </div>
+            <!-- insert csrf token input here -->
+            <input type="hidden" name="csrf_token" value="<?php echo CSRF::getToken( 'login_form' ) ?>">
         </form>
     </div>
 

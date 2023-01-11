@@ -80,4 +80,61 @@ class AUTHENTICATION
             'role' => $user['role']
         ];
      }
+
+     /**
+      * Retrieve the user's role from $_SESSION['user']
+      */
+      public static function getRole()
+      {
+        if ( self::isLoggedIn() ){
+            return $_SESSION['user']['role'];
+        }
+        return false;
+      }
+  
+      /**
+       * Check if the current logged in user is admin
+       */
+      public static function isAdmin()
+      {
+        return self::getRole() == 'admin';
+      }
+  
+      /**
+       * Check if the current logged in user is editor
+       */
+      public static function isEditor()
+      {
+        return self::getRole() == 'editor';
+      }
+        /**
+       * Check if the current logged in user is normal user
+       */
+      public static function isUser()
+      {
+        return self::getRole() == 'user';
+      }
+    /**
+     * to control user's access
+     * 
+     * $role can be 'admin', 'editor' or 'user;'
+     */
+    public static function whoCanAccess($role)
+    {
+        //make sure user is logged in
+        if ( self::isLoggedIn()){
+            switch( $role ){
+                //if the $role is admin
+                case 'admin';
+                    return self::isAdmin();
+                case 'editor';
+                    return self::isEditor() || self::isAdmin() ;
+                case 'user';
+                    return self::isUser() || self::isEditor() || self::isAdmin() ;
+            }//end - switch
+        }
+        //if no condition met,we'll return false
+        return false;
+
+    }
 }

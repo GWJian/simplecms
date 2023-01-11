@@ -43,6 +43,7 @@
 
     <div class="mt-4 d-flex justify-content-center gap-3">
         <?php if (AUTHENTICATION::isLoggedIn()) : ?>
+        <a href="/dashboard" class="btn btn-link btn-sm">Dashboard</a>
         <a href="/logout" class="btn btn-link btn-sm">Logout</a>
         <?php else : ?>
         <a href="/login" class="btn btn-link btn-sm">Login</a>

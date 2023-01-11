@@ -8,6 +8,7 @@
     require "includes/class-user.php";
     require "includes/class-authentication.php";
     require "includes/class-form-validation.php";
+    require "includes/class-csrf.php";
 
     // get route
     $path = trim( $_SERVER["REQUEST_URI"], '/' );
@@ -27,6 +28,15 @@
             break;
         case 'dashboard':
             require 'pages/dashboard.php';
+            break;  
+        case 'manage-users':
+            require 'pages/manage-users.php';
+            break;
+        case 'manage-users-edit':
+            require 'pages/manage-users-edit.php';
+            break;
+        case 'manage-users-add':
+            require 'pages/manage-users-add.php';
             break;
         default:
             require 'pages/home.php';
