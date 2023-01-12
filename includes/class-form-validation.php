@@ -115,6 +115,13 @@ class FORMVALIDATION
                         $error .= 'Invalid CSRF Token<br/> ';
                     }
                     break;
+                //make sure delete user form csfr token is match
+                case 'edit_post_form_csrf_token';
+                    // $data[$key] = $_POST['csrf_token'];
+                    if(!CSRF::verifyToken( $data[$key],'edit_post_form' )){
+                        $error .= 'Invalid CSRF Token<br/> ';
+                    }
+                    break;
             }//end - switch
         }//end - foreach
         return $error;

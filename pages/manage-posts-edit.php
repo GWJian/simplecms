@@ -5,11 +5,50 @@
         exit;
     }
     
-//load user data
+//load post data
     $post_dt = POST::getPostById( $_GET['id'] );
     
 // step 1: set CSRF token   
     CSRF::generateToken('edit_post_form');
+
+// step 2: make sure post request
+if ( $_SERVER ["REQUEST_METHOD"] === 'POST' )
+    {
+        //if both password & confirm_password fields are empty
+        //skip error checking for both fields.
+        $rules=[
+            'post-title'=>'required',
+            'status' => 'required',
+            'csrf_token'=>'edit_post_form',
+        ];
+
+        // if eiter password & confirm_password fields are not empty, 
+        // do error check for both fields
+
+        $error = FORMVALIDATION::validate(
+            $_POST,
+            $rules
+        );
+
+        if ( !$error ){
+            // step 4: update user  
+            POST::update(
+                $post_dt['id'], //id
+                $_POST['status'],//status
+                $_POST['post-title'],//title
+                $_POST['post-content'],//content
+            );
+
+
+            // step 5: remove the CSRF token
+            CSRF::removeToken( 'edit_user_form' );
+
+
+            // step 6:redirect to manage users page
+            header('Location: /manage-posts');
+            exit;
+    }
+}
 
 
     require dirname(__DIR__) . '/parts/header.php';
