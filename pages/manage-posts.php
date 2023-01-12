@@ -21,20 +21,32 @@
                 </tr>
             </thead>
             <tbody>
+                <?php foreach( POST::getAllPost() as $post ) : ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Post 1</td>
-                    <td><span class="badge bg-success">Publish</span></td>
+                    <th scope="row"><?php echo $post['id']; ?></th>
+                    <td><?php echo $post['title']; ?></td>
+                    <td>
+                        <?php switch($post['status']){
+                            case 'publish':
+                                echo '<span class="badge bg-success">Publish</span>';
+                                break;
+                            case 'pending':
+                                echo '<span class="badge bg-warning">Pending review</span>';
+                                break;
+                        }?>
+                        </class=>
+                    </td>
                     <td class="text-end">
                         <div class="buttons">
                             <a href="/post" target="_blank" class="btn btn-primary btn-sm me-2"><i
                                     class="bi bi-eye"></i></a>
-                            <a href="/manage-posts-edit" class="btn btn-secondary btn-sm me-2"><i
-                                    class="bi bi-pencil"></i></a>
+                            <a href="/manage-posts-edit?id=<?php echo $post['id']; ?>"
+                                class="btn btn-secondary btn-sm me-2"><i class="bi bi-pencil"></i></a>
                             <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
                         </div>
                     </td>
                 </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

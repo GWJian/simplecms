@@ -9,6 +9,7 @@
     require "includes/class-authentication.php";
     require "includes/class-form-validation.php";
     require "includes/class-csrf.php";
+    require "includes/class-post.php";
 
     // get route
     $path = trim( $_SERVER["REQUEST_URI"], '/' );

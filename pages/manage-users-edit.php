@@ -13,8 +13,8 @@ if ( !Authentication::whoCanAccess('admin') ) {
     CSRF::generateToken('edit_user_form'); 
 
 // step 2: make sure post request
-    if ( $_SERVER ["REQUEST_METHOD"] === 'POST' ){
-    
+    if ( $_SERVER ["REQUEST_METHOD"] === 'POST' )
+    {
     // step 3: do error check
     // Do a check to find out should we do password update or not
     $is_password_changed = ( 
