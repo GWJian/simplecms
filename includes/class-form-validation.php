@@ -47,6 +47,7 @@ class FORMVALIDATION
                         $error .= 'This field (' . $key . ') is empty <br/>';
                     }
                     break;
+                    
                 // make sure password is not empty and also more than 8 characters
                 case 'password_check';
                     // step 1: make sure password field is not empty
@@ -56,15 +57,17 @@ class FORMVALIDATION
                     }
                     // step 2: make sure length is at least 8 characters
                     else if(strlen( $data[$key] ) < 8){
-                        $error .= 'password should be at least 8 characters';
+                        $error .= 'password should be at least 8 characters <br/>';
                     }
                     break;
+
                 //make sure password is match
                 case 'is_password_match';
                     if ( $data['password'] !== $data['confirm_password'] ) {
                         $error .= 'Password do not match <br/>';
                     }
                     break;
+
                 //make sure email is valid
                 case 'email_check';
                     if ( !filter_var( $data[$key], FILTER_VALIDATE_EMAIL ) ) 
@@ -72,21 +75,48 @@ class FORMVALIDATION
                         $error .= 'Email is invalid <br/>';
                     }
                     break;
+                    
+                // make sure login form csrf token is match
                 case 'login_form_csrf_token';
                     // $data[$key] = $_POST['csrf_token'];
                     if(!CSRF::verifyToken( $data[$key],'login_form' )){
                         $error .= 'Invalid CSRF Token<br/> ';
                     }
                     break;
+
+                // make sure signup form csrf token is match
                 case 'signup_form_csrf_token';
                     // $data[$key] = $_POST['csrf_token'];
                     if(!CSRF::verifyToken( $data[$key],'signup_form' )){
                         $error .= 'Invalid CSRF Token<br/> ';
                     }
                     break;
-            }
-        }//end - foreach
 
+                //make sure edit user form csfr token is match
+                case 'edit_user_form_csrf_token';
+                    // $data[$key] = $_POST['csrf_token'];
+                    if(!CSRF::verifyToken( $data[$key],'edit_user_form' )){
+                        $error .= 'Invalid CSRF Token<br/> ';
+                    }
+                    break;
+
+                //make sure add user form csfr token is match
+                case 'add_user_form_csrf_token';
+                    // $data[$key] = $_POST['csrf_token'];
+                    if(!CSRF::verifyToken( $data[$key],'add_user_form' )){
+                        $error .= 'Invalid CSRF Token<br/> ';
+                    }
+                    break;
+
+                //make sure delete user form csfr token is match
+                case 'delete_user_form_csrf_token';
+                    // $data[$key] = $_POST['csrf_token'];
+                    if(!CSRF::verifyToken( $data[$key],'delete_user_form' )){
+                        $error .= 'Invalid CSRF Token<br/> ';
+                    }
+                    break;
+            }//end - switch
+        }//end - foreach
         return $error;
      }
 }
