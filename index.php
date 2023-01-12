@@ -38,6 +38,18 @@
         case 'manage-users-add':
             require 'pages/manage-users-add.php';
             break;
+        case 'post':
+            require 'pages/post.php';
+            break;
+        case 'manage-posts':
+            require 'pages/manage-posts.php';
+            break;
+        case 'manage-posts-edit':
+            require 'pages/manage-posts-edit.php';
+            break;
+        case 'manage-posts-add':
+            require 'pages/manage-posts-add.php';
+            break;
         default:
             require 'pages/home.php';
             break;
