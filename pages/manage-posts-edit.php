@@ -85,6 +85,7 @@ if ( $_SERVER ["REQUEST_METHOD"] === 'POST' )
             <div class="text-end">
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
+            <input type="hidden" name="csrf_token" value="<?php echo CSRF::getToken('edit_post_form') ?>">
         </form>
     </div>
     <div class="text-center">

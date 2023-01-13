@@ -122,6 +122,20 @@ class FORMVALIDATION
                         $error .= 'Invalid CSRF Token<br/> ';
                     }
                     break;
+                //make sure delete user form csfr token is match
+                case 'post_add_form_csrf_token';
+                    // $data[$key] = $_POST['csrf_token'];
+                    if(!CSRF::verifyToken( $data[$key],'post_add_form' )){
+                        $error .= 'Invalid CSRF Token<br/> ';
+                    }
+                    break;
+                //make sure delete user form csfr token is match
+                case 'delete_post_form_csrf_token';
+                    // $data[$key] = $_POST['csrf_token'];
+                    if(!CSRF::verifyToken( $data[$key],'delete_post_form' )){
+                        $error .= 'Invalid CSRF Token<br/> ';
+                    }
+                    break;
             }//end - switch
         }//end - foreach
         return $error;

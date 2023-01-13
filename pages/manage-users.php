@@ -117,8 +117,8 @@ require dirname(__DIR__) . '/parts/header.php';
                                     </div>
                                 </div>
                             </div>
-                            <?php endif; ?>
                             <!-- delete button end -->
+                            <?php endif; ?>
                         </div>
                     </td>
                 </tr>

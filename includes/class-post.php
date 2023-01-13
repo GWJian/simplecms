@@ -27,6 +27,18 @@ class POST
     /**
      * Add new post
     */
+    public static function add ($user_id,$title,$content)
+    {   
+      return DB::connect()->insert(
+          'INSERT INTO post (user_id,title,content)
+          VALUES (:user_id,:title,:content)',
+          [
+            'user_id'=>$user_id,//get data that who doing the new post
+            'title'=>$title,//update title to database
+            'content'=>$content,//update content to database
+          ]
+      );
+    }
 
     /**
      * Update post details
@@ -53,6 +65,16 @@ class POST
     /**
      * Delete post
      */
+
+           public static function delete($post_id )
+      {
+        return DB::connect()->delete(
+            'DELETE FROM post WHERE id=:id',
+            [
+                'id' => $post_id
+            ]
+        );
+      }
 
 
 }
