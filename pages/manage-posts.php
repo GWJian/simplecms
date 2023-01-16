@@ -74,9 +74,11 @@ if ( $_SERVER["REQUEST_METHOD"] === 'POST' )
                         }?>
                         </class=>
                     </td>
+
                     <td class="text-end">
                         <div class="buttons">
-                            <a href="/post" target="_blank" class="btn btn-primary btn-sm me-2"><i
+                            <a href="/post?id=<?php echo $post['id']; //<-是targer那个POST 的 ID ?>" arget="_blank"
+                                class="btn btn-primary btn-sm me-2 <?php echo ( $post['status'] === 'pending' ? 'disabled' : '' ); ?>"><i
                                     class="bi bi-eye"></i></a>
                             <a href="/manage-posts-edit?id=<?php echo $post['id']; ?>"
                                 class="btn btn-secondary btn-sm me-2"><i class="bi bi-pencil"></i></a>

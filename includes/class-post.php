@@ -25,6 +25,20 @@ class POST
     }
 
     /**
+     * Retrieve all the publish posts
+     */
+    public static function getPublishPosts()
+    {
+        return DB::connect()->select(
+            'SELECT * FROM post WHERE status=:status ORDER BY id DESC',
+            [
+                'status'=>'publish'
+            ],
+            true
+        );
+    }
+
+    /**
      * Add new post
     */
     public static function add ($user_id,$title,$content)

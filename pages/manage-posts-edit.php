@@ -74,7 +74,6 @@ if ( $_SERVER ["REQUEST_METHOD"] === 'POST' )
             <div class="mb-3">
                 <label for="post-content" class="form-label">Status</label>
                 <select class="form-control" id="post-status" name="status">
-                    <option value="">Select an option</option>
                     <option value="pending" <?php echo ( $post_dt['status'] == 'pending' ? 'selected' : '' ); ?>>
                         Pending for Review</option>
                     <option value="publish" <?php echo ( $post_dt['status'] == 'publish' ? 'selected' : '' ); ?>>
