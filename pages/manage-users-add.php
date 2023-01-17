@@ -50,9 +50,7 @@
         exit;
     }// end - $error
 
-
-    
-  } // end - $_SERVER["REQUEST_METHOD"]
+  }
 
 require dirname(__DIR__) . '/parts/header.php';
 ?>
